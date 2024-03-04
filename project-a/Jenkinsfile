@@ -1,0 +1,41 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
+        stage('Build ClamAV Mirror') {
+            when {
+                changeset "mirror/**"
+            }
+            steps {
+                dir('mirror/') {
+                    sh build.sh
+                }
+            }
+        }
+        stage('Build ClamAV Scheduler') {
+            when {
+                changeset "scheduler/**"
+            }
+            steps {
+                dir('scheduler/') {
+                    sh build.sh
+                }
+            }
+        }
+      stage('Build ClamAV Service') {
+              when {
+                  changeset "service/**"
+              }
+              steps {
+                  dir('scheduler/') {
+                      sh build.sh
+                  }
+              }
+      }
+
+    }
+}

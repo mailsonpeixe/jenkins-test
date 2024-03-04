@@ -1,0 +1,15 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    agent any
+    options {
+        timestamps()
+    }
+    stages {
+        stage('Build project B') {
+            steps {
+                sh 'echo "Building project B"'
+            }
+        }
+    }
+}
