@@ -6,8 +6,6 @@ pipeline {
         timestamps()
     }
     stages {
-    stage('project-a'){
-
         stage('Build ClamAV Mirror') {
             when {
                 changeset "mirror/**"
@@ -37,7 +35,6 @@ pipeline {
                       sh build.sh
                   }
               }
-      }
       }
 
     }
