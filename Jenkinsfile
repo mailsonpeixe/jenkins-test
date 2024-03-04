@@ -12,6 +12,9 @@ pipeline {
         }
 
         stage('Run Project A') {
+            when {
+                changeset 'project-a/**'
+            }
             steps {
                 script {
                     echo "Running Project A"
@@ -21,6 +24,9 @@ pipeline {
         }
 
         stage('Run Project B') {
+            when {
+                changeset 'project-a/**'
+            }
             steps {
                 script {
                     echo "Running Project B"
