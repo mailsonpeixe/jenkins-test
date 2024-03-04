@@ -1,26 +1,38 @@
-#!/usr/bin/env groovy
-
 pipeline {
     agent any
-    options {
-        timestamps()
-    }
+
     stages {
-        stage('Build project A') {
-            when {
-                changeset "project-a/**"
-            }
+        stage('Build') {
             steps {
-                load 'project-a/Jenkinsfile'
+                script {
+                    echo "Building the main project"
+                    // Add your main build steps here
+                }
             }
         }
-        stage('Build project B') {
-            when {
-                changeset "project-b/**"
-            }
+
+        stage('Run Project A') {
             steps {
-                load 'project-b/Jenkinsfile'
+                script {
+                    dir('project-a') {
+                        echo "Running Project A"
+                        load 'Jenkinsfile'
+                    }
+                }
             }
         }
+
+        stage('Run Project B') {
+            steps {
+                script {
+                    dir('project-b') {
+                        echo "Running Project B"
+                        load 'Jenkinsfile'
+                    }
+                }
+            }
+        }
+
+        // Add more stages as needed
     }
 }
