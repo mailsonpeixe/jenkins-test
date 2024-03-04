@@ -11,30 +11,17 @@ pipeline {
             }
         }
 
-        stage('Run Project A') {
-            when {
-                changeset 'project-a/**'
-            }
-            steps {
-                script {
-                    echo "Running Project A"
-                    buildProject('project-a')
-                }
-            }
-        }
-
-        stage('Run Project B') {
-            when {
-                changeset 'project-a/**'
-            }
-            steps {
-                script {
-                    echo "Running Project B"
-                    buildProject('project-b')
-                }
-            }
-        }
-
+       stage('Run Projects') {
+                   steps {
+                       script {
+                           parallel (
+                               "Project A": { buildProject('project-a') },
+                               "Project B": { buildProject('project-b') }
+                               // Add more projects as needed
+                           )
+                       }
+                   }
+               }
         // Add more stages as needed
     }
 }
