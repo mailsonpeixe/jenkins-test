@@ -1,5 +1,3 @@
-pipeline {
-    agent any
 
     stages {
         stage('Build Project A') {
@@ -12,4 +10,3 @@ pipeline {
         }
         // Add more stages for Project A as needed
     }
-}
