@@ -5,9 +5,6 @@ pipeline {
     options {
         timestamps()
     }
-    triggers {
-        bitbucketPush()
-    }
     stages {
         stage('Build project A') {
             when {
