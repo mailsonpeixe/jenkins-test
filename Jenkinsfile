@@ -14,10 +14,8 @@ pipeline {
         stage('Run Project A') {
             steps {
                 script {
-                    dir('project-a') {
-                        echo "Running Project A"
-                        load 'Jenkinsfile'
-                    }
+                    echo "Running Project A"
+                    buildProject('project-a')
                 }
             }
         }
@@ -25,14 +23,18 @@ pipeline {
         stage('Run Project B') {
             steps {
                 script {
-                    dir('project-b') {
-                        echo "Running Project B"
-                        load 'Jenkinsfile'
-                    }
+                    echo "Running Project B"
+                    buildProject('project-b')
                 }
             }
         }
 
         // Add more stages as needed
+    }
+}
+
+def buildProject(projectDir) {
+    dir(projectDir) {
+        load 'Jenkinsfile'
     }
 }
