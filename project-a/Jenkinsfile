@@ -10,7 +10,6 @@ pipeline {
                 }
             }
         }
-
         // Add more stages for Project A as needed
     }
 }
