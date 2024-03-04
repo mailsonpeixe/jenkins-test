@@ -1,15 +1,16 @@
-#!/usr/bin/env groovy
-
 pipeline {
     agent any
-    options {
-        timestamps()
-    }
+    
     stages {
-        stage('Build project B') {
+        stage('Build Project B') {
             steps {
-                sh 'echo "Building project B"'
+                script {
+                    echo "Building Project B"
+                    // Add your Project B build steps here
+                }
             }
         }
+        
+        // Add more stages for Project B as needed
     }
 }

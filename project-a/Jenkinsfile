@@ -1,41 +1,16 @@
-#!/usr/bin/env groovy
-
 pipeline {
     agent any
-    options {
-        timestamps()
-    }
+
     stages {
-        stage('Build ClamAV Mirror') {
-            when {
-                changeset "mirror/**"
-            }
+        stage('Build Project A') {
             steps {
-                dir('mirror/') {
-                    sh build.sh
+                script {
+                    echo "Building Project A"
+                    // Add your Project A build steps here
                 }
             }
         }
-//         stage('Build ClamAV Scheduler') {
-//             when {
-//                 changeset "scheduler/**"
-//             }
-//             steps {
-//                 dir('scheduler/') {
-//                     sh build.sh
-//                 }
-//             }
-//         }
-//       stage('Build ClamAV Service') {
-//               when {
-//                   changeset "service/**"
-//               }
-//               steps {
-//                   dir('scheduler/') {
-//                       sh build.sh
-//                   }
-//               }
-//       }
 
+        // Add more stages for Project A as needed
     }
 }
