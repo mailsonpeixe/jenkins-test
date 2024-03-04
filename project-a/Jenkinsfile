@@ -16,26 +16,26 @@ pipeline {
                 }
             }
         }
-        stage('Build ClamAV Scheduler') {
-            when {
-                changeset "scheduler/**"
-            }
-            steps {
-                dir('scheduler/') {
-                    sh build.sh
-                }
-            }
-        }
-      stage('Build ClamAV Service') {
-              when {
-                  changeset "service/**"
-              }
-              steps {
-                  dir('scheduler/') {
-                      sh build.sh
-                  }
-              }
-      }
+//         stage('Build ClamAV Scheduler') {
+//             when {
+//                 changeset "scheduler/**"
+//             }
+//             steps {
+//                 dir('scheduler/') {
+//                     sh build.sh
+//                 }
+//             }
+//         }
+//       stage('Build ClamAV Service') {
+//               when {
+//                   changeset "service/**"
+//               }
+//               steps {
+//                   dir('scheduler/') {
+//                       sh build.sh
+//                   }
+//               }
+//       }
 
     }
 }
