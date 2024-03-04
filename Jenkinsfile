@@ -11,7 +11,7 @@ pipeline {
                 changeset "project-a/**"
             }
             steps {
-                build job: 'project-a', wait: true
+                build './project-a/Jenkinsfile'
             }
         }
         stage('Build project B') {
