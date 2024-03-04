@@ -11,7 +11,7 @@ pipeline {
                 changeset "project-a/**"
             }
             steps {
-                build 'project-a'
+                load 'project-a/Jenkinsfile'
             }
         }
         stage('Build project B') {
@@ -19,7 +19,7 @@ pipeline {
                 changeset "project-b/**"
             }
             steps {
-                build 'project-b'
+                load 'project-b/Jenkinsfile'
             }
         }
     }
