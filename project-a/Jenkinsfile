@@ -1,8 +1,12 @@
 node {
     stage('Build') {
-        if(isMyDirChanged()){
-            sh 'echo "building Project A"'
+        when {
+                        changeset "mirror/**"
         }
+        steps {
+              sh 'echo "building Project A"'
+        }
+
     }
     stage('Deploy') {
         sh 'echo "Deploy Project A"'
