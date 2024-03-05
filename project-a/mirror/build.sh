@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-echo "Building Mirror... Done."
+echo "Building Mirror... Done.!"
 
 

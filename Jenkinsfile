@@ -25,7 +25,7 @@ pipeline {
                    }
        }
 
-              stage('Run Projects Mirror') {
+              stage('Run Projects Service') {
                            when {
                                changeset "project-a/service/**"
                            }
