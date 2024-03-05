@@ -7,25 +7,27 @@ pipeline {
            when {
                changeset "project-a/mirror/**"
            }
-           steps {
-               script {
-                   dir('project-a/mirror/') {
-                       sh './build.sh'
-                   }
-               }
-           }
+          steps {
+            buildProject('/project-a/mirror')
+            }
        }
        stage('Run Project Service') {
           when {
               changeset "project-a/service/**"
           }
           steps {
-              script {
-                  dir('project-a/service/') {
-                      sh './build.sh'
-                  }
-              }
-          }
+            buildProject('/project-a/service')
+            }
        }
     }
 }
+def buildProject(projectDir) {
+                withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
+                    script {
+                        dir(projectDir) {
+                            sh './build.sh'
+                        }
+                    }
+                }
+
+    }
