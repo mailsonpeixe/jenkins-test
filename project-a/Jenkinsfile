@@ -1,8 +1,24 @@
 node {
     stage('Build') {
-        sh 'echo "building Project A"'
+        if(isMyDirChanged()){
+            sh 'echo "building Project A"'
+        }
     }
     stage('Deploy') {
         sh 'echo "Deploy Project A"'
     }
+}
+
+@NonCPS
+boolean isMyDirChanged() {
+  for (changeLogSet in currentBuild.changeSets) {
+    for (entry in changeLogSet.getItems()) { // for each commit in the detected changes
+      for (file in entry.getAffectedFiles()) {
+        if (file.getPath() ==~ /^mirror/) {
+          return true
+        }
+      }
+    }
+  }
+  return false
 }
