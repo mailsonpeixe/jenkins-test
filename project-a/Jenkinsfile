@@ -1,12 +1,8 @@
-
-    stages {
-        stage('Build Project A') {
-            steps {
-                script {
-                    echo "Building Project A"
-                    // Add your Project A build steps here
-                }
-            }
-        }
-        // Add more stages for Project A as needed
+node {
+    stage('Build') {
+        sh 'echo "building Project A"'
     }
+    stage('Deploy') {
+        sh 'echo "Deploy Project A"'
+    }
+}
