@@ -1,16 +1,8 @@
-pipeline {
-    agent any
-    
-    stages {
-        stage('Build Project B') {
-            steps {
-                script {
-                    echo "Building Project B"
-                    // Add your Project B build steps here
-                }
-            }
-        }
-        
-        // Add more stages for Project B as needed
+node {
+    stage('Build') {
+        sh 'echo "building Project B"'
+    }
+    stage('Deploy') {
+        sh 'echo "Deploy Project B"'
     }
 }
