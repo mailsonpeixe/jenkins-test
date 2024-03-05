@@ -1,11 +1,7 @@
 node {
     stage('Build') {
-        when {
-                        changeset "mirror/**"
-        }
-        steps {
-              sh 'echo "building Project A"'
-        }
+
+        sh build.sh
 
     }
     stage('Deploy') {
