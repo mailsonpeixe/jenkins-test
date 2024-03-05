@@ -12,27 +12,32 @@ pipeline {
             }
         }
 
-       stage('Run Projects A') {
+       stage('Run Projects Mirror') {
+                    when {
+                        changeset "project-a/mirror/**"
+                    }
                    steps {
                        script {
-                           parallel (
-                               "Project A": { buildProject('project-a') }
-                               // Add more projects as needed
-                           )
+                           dir('project-a/mirror/') {
+                               sh './build.sh'
+                           }
                        }
                    }
        }
-       stage('Run Projects') {
-                   steps {
-                       script {
-                           parallel (
-                               "Project B": { buildProject('project-b') }
-                               // Add more projects as needed
-                           )
-                       }
-                   }
-       }
-        // Add more stages as needed
+
+              stage('Run Projects Mirror') {
+                           when {
+                               changeset "project-a/service/**"
+                           }
+                          steps {
+                              script {
+                                  dir('project-a/service/') {
+                                      sh './build.sh'
+                                  }
+                              }
+                          }
+              }
+
     }
 }
 
