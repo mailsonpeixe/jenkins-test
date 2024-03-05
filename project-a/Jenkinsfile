@@ -1,7 +1,7 @@
 node {
     stage('Build') {
 
-        sh build.sh
+        sh 'echo "building Project A"'
 
     }
     stage('Deploy') {
