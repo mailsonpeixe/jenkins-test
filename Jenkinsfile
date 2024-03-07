@@ -34,7 +34,7 @@ pipeline {
               changeset "clamav/mirror/**"
           }
          steps {
-           buildProject('/clamav/mirror')
+           buildProject('./clamav/mirror')
            }
       }
       stage('Run Project Service') {
@@ -42,7 +42,7 @@ pipeline {
              changeset "clamav/service/**"
          }
          steps {
-           buildProject('/clamav/service')
+           buildProject('./clamav/service')
            }
       }
       stage('Run Project Scheduler') {
@@ -50,7 +50,7 @@ pipeline {
              changeset "clamav/scheduler/**"
          }
          steps {
-           buildProject('/clamav/scheduler')
+           buildProject('./clamav/scheduler')
            }
       }
 
