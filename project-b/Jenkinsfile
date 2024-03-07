@@ -1,8 +1,0 @@
-node {
-    stage('Build') {
-        sh 'echo "building Project B"'
-    }
-    stage('Deploy') {
-        sh 'echo "Deploy Project B"'
-    }
-}

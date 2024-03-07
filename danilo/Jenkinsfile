@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 @Library('WorkflowCiSharedLib') _
 
 def URL
@@ -54,3 +56,4 @@ pipeline {
     }
   }
 }
+
