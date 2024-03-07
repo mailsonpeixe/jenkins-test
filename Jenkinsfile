@@ -22,35 +22,37 @@ pipeline {
   }
 
   stages {
-    stage('Prepare') {
-      steps {
-        script {
-          commentJiraPr()
+      stage('Prepare') {
+        steps {
+          script {
+            commentJiraPr()
+          }
         }
       }
-    }
-    stage('Run Project Mirror') {
-        when {
-            changeset "clamav/mirror/**"
-        }
-       steps {
-         buildProject('/clamav/mirror')
+      stage('Run Project Mirror') {
+          when {
+              changeset "clamav/mirror/**"
+          }
+         steps {
+           buildProject('/clamav/mirror')
+           }
+      }
+      stage('Run Project Service') {
+         when {
+             changeset "clamav/service/**"
          }
-    }
-    stage('Run Project Service') {
-       when {
-           changeset "clamav/service/**"
-       }
-       steps {
-         buildProject('/clamav/service')
+         steps {
+           buildProject('/clamav/service')
+           }
+      }
+      stage('Run Project Scheduler') {
+         when {
+             changeset "clamav/scheduler/**"
          }
-    stage('Run Project Scheduler') {
-       when {
-           changeset "clamav/scheduler/**"
-       }
-       steps {
-         buildProject('/clamav/scheduler')
-         }
-    }
+         steps {
+           buildProject('/clamav/scheduler')
+           }
+      }
+
   }
 }
