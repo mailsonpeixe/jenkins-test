@@ -22,13 +22,13 @@ pipeline {
   // }
 
   stages {
-      stage('Prepare') {
-        steps {
-          script {
-            commentJiraPr()
-          }
-        }
-      }
+      // stage('Prepare') {
+      //   steps {
+      //     script {
+      //       commentJiraPr()
+      //     }
+      //   }
+      // }
       stage('Run Project Mirror') {
           when {
               changeset "clamav/mirror/**"
