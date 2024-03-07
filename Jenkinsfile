@@ -3,13 +3,13 @@
 def URL
 
 def buildProject(projectDir) {
-                withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
+                // withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
                     script {
                         dir(projectDir) {
                             sh './build.sh'
                         }
                     }
-                }
+                // }
 
     }
 
