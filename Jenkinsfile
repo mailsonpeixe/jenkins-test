@@ -29,14 +29,9 @@ pipeline {
       //     }
       //   }
       // }
-      when {
-        anyOf {
-          branch 'develop'
-          branch 'production'
-        }
-      }
       stage('Run Project Mirror') {
           when {
+              expression { BRANCH_NAME ==~ /(production|develop)/ }
               changeset "clamav/mirror/**"
           }
          steps {
