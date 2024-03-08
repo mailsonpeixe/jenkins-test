@@ -31,7 +31,7 @@ pipeline {
       // }
       when {
         anyOf {
-          branch 'develop';
+          branch 'develop'
           branch 'production'
         }
       }
