@@ -1,11 +1,9 @@
 
 def buildServiceImage(serviceDir) {
-  withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
-    script {
+  script {
       dir(serviceDir) {
         sh './build.sh'
       }
-    }
   }
 }
 
