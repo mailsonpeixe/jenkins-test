@@ -1,8 +1,8 @@
 
-def buildProject(projectDir) {
+def buildServiceImage(serviceDir) {
   withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
     script {
-      dir(projectDir) {
+      dir(serviceDir) {
         sh './build.sh'
       }
     }
