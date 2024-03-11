@@ -1,59 +1,50 @@
-// @Library('WorkflowCiSharedLib') _
-
-def URL
 
 def buildProject(projectDir) {
-                // withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
-                    script {
-                        dir(projectDir) {
-                            sh './build.sh'
-                        }
-                    }
-                // }
-
+  withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
+    script {
+      dir(projectDir) {
+        sh './build.sh'
+      }
     }
+  }
+}
 
 pipeline {
-
   agent any
 
-  // options {
-  //   ansiColor('xterm')
-  // }
-
   stages {
-      // stage('Prepare') {
-      //   steps {
-      //     script {
-      //       commentJiraPr()
-      //     }
-      //   }
-      // }
-      stage('Run Project Mirror') {
-          when {
-              expression { BRANCH_NAME ==~ /(production|develop)/ }
-              changeset "clamav/mirror/**"
-          }
-         steps {
-           buildProject('./clamav/mirror')
-           }
+    stage('Build and Push Clamav Mirror Docker Image') {
+      when {
+        allOf {
+          expression { BRANCH_NAME ==~ /(production|develop)/ }
+          changeset 'images/clamav/mirror/build.sh'
+        }
       }
-      stage('Run Project Service') {
-         when {
-             changeset "clamav/service/**"
-         }
-         steps {
-           buildProject('./clamav/service')
-           }
+      steps {
+        buildServiceImage('./images/clamav/mirror')
       }
-      stage('Run Project Scheduler') {
-         when {
-             changeset "clamav/scheduler/**"
-         }
-         steps {
-           buildProject('./clamav/scheduler')
-           }
+    }
+    stage('Build and Push Clamav Service Docker Image') {
+      when {
+        allOf {
+          expression { BRANCH_NAME ==~ /(production|develop)/ }
+          changeset 'images/clamav/service/build.sh'
+        }
       }
-
+      steps {
+        buildServiceImage('./images/clamav/service')
+      }
+    }
+    stage('Build and Push Clamav Scheduler Docker Image') {
+      when {
+        allOf {
+          expression { BRANCH_NAME ==~ /(production|develop)/ }
+          changeset 'images/clamav/scheduler/build.sh'
+        }
+      }
+      steps {
+        buildServiceImage('./images/clamav/scheduler')
+      }
+    }
   }
 }
